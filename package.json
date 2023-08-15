@@ -1,0 +1,29 @@
+{
+    "name": "consultas_bd",
+    "version": "1.0.0",
+    "description": "para probar formas de consultar a bd",
+    "main": "ServerApi.ts",
+    "scripts": {
+        "start": "ts-node-dev src/ServerApi.ts"
+    },
+    "author": "alfonso gomajoa",
+    "license": "ISC",
+    "dependencies": {
+        "@types/validator": "^13.9.0",
+        "cookie-parser": "^1.4.6",
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "mysql2": "^3.5.2",
+        "ssh2": "^1.14.0",
+        "ts-node-dev": "^2.0.0"
+    },
+    "devDependencies": {
+        "@types/cookie-parser": "^1.4.3",
+        "@types/cors": "^2.8.13",
+        "@types/express": "^4.17.17",
+        "@types/mysql2": "github:types/mysql2",
+        "@types/node": "^20.4.10",
+        "@types/server": "^1.0.5",
+        "typescript": "^5.1.6"
+    }
+}
