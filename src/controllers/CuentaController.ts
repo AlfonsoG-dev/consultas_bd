@@ -24,7 +24,7 @@ export class CuentaController{
         }
     }
 
-    async read_all(req: Request, res:Response){
+    async read_all_by_user(req: Request, res:Response){
         try{
             const data_req = req.cookies['miApiCookie']
             const data_res = await this.repository.get_cuentas_by_user(data_req[0].nombre, data_req[0].email);

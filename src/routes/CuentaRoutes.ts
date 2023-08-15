@@ -18,7 +18,7 @@ export class CuentaRoutes implements RoutesModel{
         this.cuenta_router.use(this.controller.verificate_data_cuenta.bind(this.controller))
     }
     get_all_route(): void {
-        this.cuenta_router.get("/", this.controller.read_all.bind(this.controller))
+        this.cuenta_router.get("/", this.controller.read_all_by_user.bind(this.controller))
     }
     get_by_name_route(): void {
         throw new Error("Method not implemented.");
