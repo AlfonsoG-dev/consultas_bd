@@ -26,11 +26,16 @@ export class CuentaController{
 
     async read_all(req: Request, res:Response){
         try{
-            const data_res = await this.repository.read_all;
-            if(data_res !== undefined && data_res?.length > 0){
-                res.status(200).json(data_res)
+            const data_req = req.cookies['miApiCookie']
+            if(data_req !== undefined){
+                const data_res = await this.repository.get_cuentas_by_user(data_req.nombre, data_req.email, data_req.password);
+                if(data_res !== undefined && data_res?.length > 0){
+                    res.status(200).json(data_res)
+                }else{
+                    res.status(400).json({error: "no hay cuentas"})
+                }
             }else{
-                res.status(400).json({error: "no hay cuentas"})
+                res.status(400).json({error: "usuario no autenticado"})
             }
         }catch(err: CuentaControllerError){
             throw Error(`${err} en la ruta ${req.path}`)
