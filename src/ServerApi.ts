@@ -24,6 +24,11 @@ class ServerApi{
         this.app.use(express.json())
         this.app.use(cookieParser())
     }
+    UseErrorMiddleware(){
+        this.app.use(function(req, res){
+            res.status(404).json({error: "página no disponible"})
+        })
+    }
 
     UseRoutes(){
         this.app.use("/user", this.user_routes.routes)
@@ -37,6 +42,7 @@ class ServerApi{
             res.send(req.ip)
         })
         this.UseRoutes()
+        this.UseErrorMiddleware()
         this.app.listen(ServerApi.PORT, ()=>{
             console.log(`express server in port ${ServerApi.PORT}`)
         })
