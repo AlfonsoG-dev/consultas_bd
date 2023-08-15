@@ -26,7 +26,7 @@ class ServerApi{
     }
 
     UseRoutes(){
-        this.app.use("/user",this.user_routes.routes)
+        this.app.use("/user", this.user_routes.routes)
         this.app.use("/cuenta", this.cuenta_router.routes)
     }
 

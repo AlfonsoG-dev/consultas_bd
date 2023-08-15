@@ -24,6 +24,7 @@
         "@types/mysql2": "github:types/mysql2",
         "@types/node": "^20.4.10",
         "@types/server": "^1.0.5",
+        "@types/ssh2": "^1.11.13",
         "typescript": "^5.1.6"
     }
 }
