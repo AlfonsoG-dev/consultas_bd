@@ -1,12 +1,13 @@
 import {Client} from"ssh2"
 import mysql, {Connection, QueryError} from "mysql2"
+import {ConsoleConstructor} from "console";
 
 export class SSHConection{
     private client: Client;
     constructor(){
         this.client = new Client()
     }
-    ssh_conection(){
+    ssh_conection():Promise<Connection>{
         const dbServer = {
             host: 'localhost',
             port: 3306,
@@ -27,7 +28,7 @@ export class SSHConection{
             dstHost: dbServer.host,
             dstPort: dbServer.port
         }
-        const ssh_con: Promise<Connection> =  new Promise((resolve, reject)=>{
+        return new Promise((resolve, reject)=>{
             this.client.on('ready', () =>{
                 this.client.forwardOut(forward.srcHost, forward.dstPort, forward.dstHost, forward.dstPort, (err, stream)=>{
                     if(err)reject(err)
@@ -46,6 +47,5 @@ export class SSHConection{
                 })
             }).connect(tunel)
         })
-        return ssh_con
     }
 }
