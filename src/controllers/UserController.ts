@@ -35,7 +35,7 @@ export class UserController {
     }
     async read_by_name(req: Request, res: Response){
         try{
-            const data_req:string = req.params.name
+            const data_req:string = req.body
             const data_res: UserRepositoryType = await this.repository.read_by_name(data_req)
             if(data_res !== undefined && data_res.length >0){
                 res.status(200).json(data_res)
@@ -50,7 +50,7 @@ export class UserController {
 
     async read_by_email(req: Request, res: Response){
         try{
-            const data_req: string = req.params.email;
+            const data_req: string = req.body
             const data_res: UserRepositoryType = await this.repository.read_by_email(data_req)
             if(data_res !== undefined && data_res.length > 0) {
                  res.status(200).json(data_res)
