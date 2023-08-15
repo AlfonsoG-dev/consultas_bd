@@ -32,4 +32,13 @@ export class DbConfig {
             queueLimit: this.queue_limit
         }
     }
+    get db_server_config(){
+        return {
+            host: 'localhost',
+            port: 3306,
+            user: 'pym',
+            password: '5x5W12',
+            database: 'consulta'
+        }
+    }
 }
