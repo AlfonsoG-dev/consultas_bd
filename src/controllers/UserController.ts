@@ -14,7 +14,7 @@ export class UserController {
 
     async verificate_data_user(req: Request, res: Response, next: NextFunction){
         try{
-            const data_res = Promise.all([this.repository.verificate_database('consulta'), this.repository.select_database('consulta'), this.repository.verificate_table()])
+            const data_res = Promise.all([this.repository.verificate_database(), this.repository.select_database(), this.repository.verificate_table()])
             console.log(await data_res)
             next()
         }catch(err: UserControllerError){
