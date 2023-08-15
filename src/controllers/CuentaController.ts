@@ -27,8 +27,9 @@ export class CuentaController{
     async read_all(req: Request, res:Response){
         try{
             const data_req = req.cookies['miApiCookie']
+            console.log(data_req[0])
             if(data_req !== undefined){
-                const data_res = await this.repository.get_cuentas_by_user(data_req.nombre, data_req.email, data_req.password);
+                const data_res = await this.repository.get_cuentas_by_user(data_req[0].nombre, data_req[0].email);
                 if(data_res !== undefined && data_res?.length > 0){
                     res.status(200).json(data_res)
                 }else{

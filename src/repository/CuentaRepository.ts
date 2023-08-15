@@ -42,9 +42,9 @@ export class CuentaRepository implements DbQueryModel{
             })
         })
     }
-    get_cuentas_by_user(nombre: string, email: string, password: string) : Promise<CuentaTypes[] | undefined>{
+    get_cuentas_by_user(nombre: string, email: string) : Promise<CuentaTypes[] | undefined>{
         return new Promise((resolve, reject)=>{
-            this.query.execute('select nombre, email, create_at, update_at from `consulta`.cuentas where nombre=? or email=? and password=?', [nombre, email, password], function(err: QueryError | null, res: CuentaTypes[]){
+            this.query.execute('select nombre, email, create_at, update_at from `consulta`.cuentas where nombre=? or email=?', [nombre, email], function(err: QueryError | null, res: CuentaTypes[]){
                 if(err)reject(err)
                 resolve(res)
             })
