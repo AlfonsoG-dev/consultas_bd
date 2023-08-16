@@ -45,4 +45,18 @@ export class AuthMiddleware {
             throw Error(`${err} en la ruta ${req.path}`)
         }
     }
+
+    verificar_isAdmin(req: Request, res: Response, next: NextFunction){
+        try{
+            const data_req = req.cookies
+            const [data_res] = data_req['miApiCookie']
+            if(data_res !== undefined && data_res.rol === 'admin'){
+                next()
+            }else{
+                res.status(400).json({error: "solo admin puede acceder a este sitio"})
+            }
+        }catch(err: ErrorTypes){
+            throw Error(`${err} en la ruta ${req.path}`)
+        }
+    }
 }
