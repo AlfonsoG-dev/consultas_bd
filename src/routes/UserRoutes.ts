@@ -20,10 +20,10 @@ export class UserRoutes implements RoutesModel{
         this.user_routes.get("/", this.controller.read_all.bind(this.controller))
     }
     get_name_route(): void {
-        this.user_routes.post("/get-name", this.controller.read_by_name.bind(this.controller))
+        this.user_routes.post("/get-name", this.controller.read_name.bind(this.controller))
     }
     get_email_route(): void {
-        this.user_routes.post("/get-email", this.controller.read_by_email.bind(this.controller))
+        this.user_routes.post("/get-email", this.controller.read_email.bind(this.controller))
     }
     get_by_id_route(): void {
         this.user_routes.get("/get-id/:id", this.controller.read_by_id.bind(this.controller))
@@ -40,9 +40,9 @@ export class UserRoutes implements RoutesModel{
     get routes(): express.Router{
         this.UseMiddleware()
         this.get_all_route()
-        this.get_by_name_route()
+        this.get_name_route()
         this.get_by_id_route()
-        this.get_by_email_route()
+        this.get_email_route()
         this.post_register_route()
         this.delete_register_route()
         this.update_register_route()
