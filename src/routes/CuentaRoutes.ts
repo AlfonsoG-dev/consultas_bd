@@ -36,7 +36,7 @@ export class CuentaRoutes implements RoutesModel{
         throw new Error("Method not implemented.");
     }
     update_register_route(): void {
-        throw new Error("Method not implemented.");
+        this.cuenta_router.put("/put-cuenta", this.controller.update_register.bind(this.controller))
     }
 
     get routes(): express.Router{
@@ -47,7 +47,7 @@ export class CuentaRoutes implements RoutesModel{
         this.get_by_id_route()
         this.post_register_route()
         //this.delete_register_route()
-        //this.update_register_route()
+        this.update_register_route()
         return this.cuenta_router
     }
 }
