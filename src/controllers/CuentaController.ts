@@ -117,6 +117,15 @@ export class CuentaController{
     }
     async update_register(req: Request, res: Response){
         try{
+            const data_req: CuentaTypes = req.body
+            const [data_user] = req.cookies['miApiCookie']
+            const nCuenta: Cuenta = new Cuenta(data_user.id, data_req.nombre, data_req.email, data_req.password, data_user.rol)
+            const data_res: ResultSetHeader | undefined = await this.repository.update_register(nCuenta)
+            if(data_res !== undefined){
+                res.status(200).json(data_res)
+            }else{
+                res.status(400).json({error: "no se puede modificar la cuenta"})
+            }
         }catch(err: CuentaControllerError){
             throw Error(`${err} en la ruata ${req.path}`)
         }
