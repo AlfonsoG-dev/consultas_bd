@@ -40,9 +40,9 @@ export class UserRoutes implements RoutesModel{
     get routes(): express.Router{
         this.UseMiddleware()
         this.get_all_route()
-        this.get_name_route()
+        this.get_by_name_route()
         this.get_by_id_route()
-        this.get_email_route()
+        this.get_by_email_route()
         this.post_register_route()
         this.delete_register_route()
         this.update_register_route()

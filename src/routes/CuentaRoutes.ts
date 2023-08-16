@@ -21,7 +21,7 @@ export class CuentaRoutes implements RoutesModel{
         this.cuenta_router.get("/", this.controller.read_all_by_user.bind(this.controller))
     }
     get_by_name_route(): void {
-        this.cuenta_router.post("/get-nombre", this.controller.read_by_name.bind(this.controller))
+        this.cuenta_router.post("/get-name", this.controller.read_by_name.bind(this.controller))
     }
     get_by_email_route(): void {
         this.cuenta_router.post("/get-email", this.controller.read_by_email.bind(this.controller))
@@ -45,9 +45,9 @@ export class CuentaRoutes implements RoutesModel{
         this.get_by_name_route()
         this.get_by_email_route()
         this.get_by_id_route()
-        this.post_register_route()
-        this.delete_register_route()
-        this.update_register_route()
+        //this.post_register_route()
+        //this.delete_register_route()
+        //this.update_register_route()
         return this.cuenta_router
     }
 }

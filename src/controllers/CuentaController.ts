@@ -70,6 +70,7 @@ export class CuentaController{
     async read_by_name(req: Request, res: Response){
         try{
             const data_req: CuentaTypes = req.body
+            console.log(data_req)
             const data_res: CuentaRepositoryType = await this.repository.read_by_name(data_req.nombre)
 
             if(data_res !== undefined && data_res.length > 0){

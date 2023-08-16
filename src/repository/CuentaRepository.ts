@@ -2,7 +2,6 @@ import { Cuenta, CuentaTypes } from "../Models/Cuenta";
 import { DbConection } from "../services/DbConection";
 import { ResultSetHeader, QueryError, Connection } from "mysql2";
 import {DbQueryModel} from "../Models/DbQueryModel";
-import {UserTypes, User} from "../Models/User";
 
 export class CuentaRepository implements DbQueryModel{
     private query: Connection
@@ -44,7 +43,7 @@ export class CuentaRepository implements DbQueryModel{
     }
     get_cuentas_by_user(user_id: number) : Promise<CuentaTypes[] | undefined>{
         return new Promise((resolve, reject)=>{
-            this.query.execute('select id, nombre, email, create_at, update_at from `consulta`.cuentas where user_id=?', [user_id], function(err: QueryError | null, res: CuentaTypes[]){
+            this.query.execute('select cuenta_id, nombre, email, create_at, update_at from `consulta`.cuentas where user_id=?', [user_id], function(err: QueryError | null, res: CuentaTypes[]){
                 if(err)reject(err)
                 resolve(res)
             })
@@ -68,20 +67,20 @@ export class CuentaRepository implements DbQueryModel{
     }
     read_by_id(id: number): Promise<CuentaTypes[] | undefined> {
         return new Promise((resolve, reject) =>{
-            this.query.execute('select nombre, email, create_at, update_at from `consulta`.cuentas where id=?', [id], function(err: QueryError | null, res: CuentaTypes[]){
+            this.query.execute('select nombre, email, create_at, update_at from `consulta`.cuentas where cuenta_id=?', [id], function(err: QueryError | null, res: CuentaTypes[]){
                 if(err)reject(err)
                 resolve(res)
             })
         })
     }
     //TODO: agregar inser, update, delete
-    insert_register(nUser: User): Promise<ResultSetHeader | undefined> {
+    insert_register(nCuenta: Cuenta): Promise<ResultSetHeader | undefined> {
         throw new Error("Method not implemented.");
     }
-    update_register(nUser: User): Promise<ResultSetHeader | undefined> {
+    update_register(nCuenta: Cuenta): Promise<ResultSetHeader | undefined> {
         throw new Error("Method not implemented.");
     }
-    delete_register(user_id: number): Promise<ResultSetHeader | undefined> {
+    delete_register(cuenta_id: number): Promise<ResultSetHeader | undefined> {
         throw new Error("Method not implemented.");
     }
 }
