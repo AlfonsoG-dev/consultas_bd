@@ -74,6 +74,7 @@ export class CuentaRepository implements DbQueryModel{
             })
         })
     }
+    //TODO: agregar inser, update, delete
     insert_register(nUser: User): Promise<ResultSetHeader | undefined> {
         throw new Error("Method not implemented.");
     }
