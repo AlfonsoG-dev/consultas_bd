@@ -13,6 +13,7 @@ export class UserRoutes implements RoutesModel{
     }
     UseMiddleware(){
         this.user_routes.use(this.auth_middleware.verificar_autenticacion.bind(this.auth_middleware));
+        this.user_routes.use(this.auth_middleware.verificar_isAdmin.bind(this.auth_middleware))
         this.user_routes.use(this.controller.verificate_data_user.bind(this.controller))
     }
     get_all_route(){
