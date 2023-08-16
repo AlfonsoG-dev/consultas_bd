@@ -26,7 +26,7 @@ export class DbConection {
         })
     }
 }
-const mydb = new DbConection()
+/**const mydb = new DbConection()
 
 const res = async() =>{
     return new Promise((resolve, reject)=>{
@@ -38,4 +38,4 @@ const res = async() =>{
         })
     })
 }
-res().then((rs) => console.log(rs))
+res().then((rs) => console.log(rs))**/
