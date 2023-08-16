@@ -49,9 +49,9 @@ export class CuentaRepository implements DbQueryModel{
             })
         })
     }
-    read_by_email(email: string): Promise<CuentaTypes[] | undefined> {
+    read_by_email(email: string, id:number): Promise<CuentaTypes[] | undefined> {
         return new Promise((resolve, reject) =>{
-            this.query.execute('select nombre, email from `consulta`.cuentas where email=?', [email], function(err: QueryError| null, res: CuentaTypes[]){
+            this.query.execute('select nombre, email from `consulta`.cuentas where email=? and user_id=?', [email, id], function(err: QueryError| null, res: CuentaTypes[]){
                 if(err)reject(err)
                 resolve(res)
             })
