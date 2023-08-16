@@ -10,13 +10,13 @@ export interface CuentaTypes extends UserTypes{
 
 export class Cuenta extends User{
 
-    private cuenta_id?: number | undefined
+    private user_id?: number | undefined
     constructor(nombre: string, email: string, password: string, rol: string){
         super(nombre, email, password, rol)
     }
 
-    get get_cuenta_id(){
-        return this.cuenta_id
+    get get_user_id(){
+        return this.user_id
     }
 
 }
