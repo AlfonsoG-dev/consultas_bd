@@ -57,17 +57,17 @@ export class CuentaRepository implements DbQueryModel{
             })
         })
     }
-    read_by_name(nombre: string): Promise<CuentaTypes[] | undefined> {
+    read_by_name(nombre: string, id: number): Promise<CuentaTypes[] | undefined> {
         return new Promise((resolve, reject)=>{
-            this.query.execute('select nombre, email from `consulta`.cuentas where nombre = ?', [nombre], function(err: QueryError | null, res: CuentaTypes[]){
+            this.query.execute('select nombre, email from `consulta`.cuentas where nombre = ? and user_id=?', [nombre, id], function(err: QueryError | null, res: CuentaTypes[]){
                 if(err)reject(err)
                 resolve(res)
             })
         })
     }
-    read_by_id(id: number): Promise<CuentaTypes[] | undefined> {
+    read_by_id(id: number, user_id: number): Promise<CuentaTypes[] | undefined> {
         return new Promise((resolve, reject) =>{
-            this.query.execute('select nombre, email, create_at, update_at from `consulta`.cuentas where cuenta_id=?', [id], function(err: QueryError | null, res: CuentaTypes[]){
+            this.query.execute('select nombre, email, create_at, update_at from `consulta`.cuentas where cuenta_id=? and user_id=?', [id, user_id], function(err: QueryError | null, res: CuentaTypes[]){
                 if(err)reject(err)
                 resolve(res)
             })
