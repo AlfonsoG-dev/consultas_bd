@@ -27,7 +27,7 @@ export class CuentaController{
     async read_all_by_user(req: Request, res:Response){
         try{
             const data_req = req.cookies['miApiCookie']
-            const data_res = await this.repository.get_cuentas_by_user(data_req[0].nombre, data_req[0].email);
+            const data_res: CuentaTypes[] | undefined = await this.repository.get_cuentas_by_user(data_req[0].id);
                 if(data_res !== undefined && data_res?.length > 0){
                     res.status(200).json(data_res)
                 }else{
@@ -41,14 +41,29 @@ export class CuentaController{
         try{
             const [data_req] = req.cookies['miApiCookie']
             if(data_req.rol === 'admin'){
-                const data_res = await this.repository.read_all
+                const data_res: CuentaTypes[] | undefined = await this.repository.read_all
                 res.status(200).json(data_res)
             }else{
                 res.status(400).json({error: "solo admin tiene acceso"})
             }
 
         }catch(err: CuentaControllerError){
-            throw Error(err)
+            throw Error(`${err} en la ruta ${req.path}`)
+        }
+    }
+
+    async read_by_email(req: Request, res: Response){
+        try{
+            const data_req: CuentaTypes = req.body
+            const data_res: CuentaTypes[] | undefined = await this.repository.read_by_email(data_req.email)
+            if(data_res !== undefined && data_res.length > 0){
+                res.status(200).json(data_res)
+            }else{
+                res.status(400).json({error: "la cuenta no esta registrada"})
+            }
+
+        }catch(err: CuentaControllerError){
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
 }

@@ -50,8 +50,13 @@ export class CuentaRepository implements DbQueryModel{
             })
         })
     }
-    read_by_email(user_email: string): Promise<UserTypes[] | undefined> {
-        throw new Error("Method not implemented.");
+    read_by_email(email: string): Promise<CuentaTypes[] | undefined> {
+        return new Promise((resolve, reject) =>{
+            this.query.execute('select nombre, email, create_at, update_at from `consulta`.cuentas where email=?', [email], function(err: QueryError| null, res: CuentaTypes[]){
+                if(err)reject(err)
+                resolve(res)
+            })
+        })
     }
     read_by_name(user_name: string): Promise<CuentaTypes[] | undefined> {
         throw new Error("Method not implemented.");
