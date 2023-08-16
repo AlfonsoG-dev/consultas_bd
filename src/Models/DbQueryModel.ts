@@ -1,9 +1,9 @@
 import { ResultSetHeader, RowDataPacket } from "mysql2"
 import { User } from "./User"
 export interface DbQueryModel{
-    verificate_database(T: any): Promise<ResultSetHeader | undefined>
+    verificate_database(): Promise<ResultSetHeader | undefined>
     verificate_table(): Promise<ResultSetHeader | undefined>
-    select_database(T: any): Promise<ResultSetHeader | undefined>
+    select_database(): Promise<ResultSetHeader | undefined>
     get read_all(): Promise<RowDataPacket[] | undefined>
     read_by_email(T: any): Promise<RowDataPacket[] | undefined>
     read_by_name(T: any): Promise<RowDataPacket[] | undefined>
