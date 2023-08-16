@@ -75,7 +75,7 @@ export class CuentaRepository implements DbQueryModel{
     }
     insert_register(nCuenta: Cuenta): Promise<ResultSetHeader | undefined> {
         return new Promise((resolve, reject)=>{
-            this.query.execute('insert into `consulta`.cuentas (nombre, email, user_id, create_at) values(?, ?, ?, ?)', [nCuenta.get_nombre, nCuenta.get_email, nCuenta.get_user_id], function(err: QueryError | null, res: ResultSetHeader){
+            this.query.execute('insert into `consulta`.cuentas (nombre, email, user_id, create_at) values(?, ?, ?, ?)', [nCuenta.get_nombre, nCuenta.get_email, nCuenta.get_user_id, nCuenta.get_create_at], function(err: QueryError | null, res: ResultSetHeader){
                 if(err)reject(err)
                 resolve(res)
             })
