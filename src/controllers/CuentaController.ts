@@ -82,4 +82,17 @@ export class CuentaController{
             throw Error(`${err} en la ruta ${req.path}`)
         }
     }
+    async read_by_id(req: Request, res: Response){
+        try{
+            const data_req: number = parseInt(req.params.id)
+            const data_res: CuentaTypes[] | undefined = await this.repository.read_by_id(data_req)
+            if(data_res !== undefined && data_res.length > 0 ){ 
+                res.status(200).json(data_res)
+            }else{
+                res.status(400).json({error: "no se encuentra la cuenta"})
+            }
+        }catch(err: CuentaControllerError){
+            throw Error(`${err} en la ruta ${req.path}`)
+        }
+    }
 }
