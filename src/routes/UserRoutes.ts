@@ -19,10 +19,10 @@ export class UserRoutes implements RoutesModel{
         this.user_routes.get("/", this.controller.read_all.bind(this.controller))
     }
     get_by_name_route(): void {
-        this.user_routes.get("/get-name", this.controller.read_by_name.bind(this.controller))
+        this.user_routes.post("/get-name", this.controller.read_by_name.bind(this.controller))
     }
     get_by_email_route(): void {
-        this.user_routes.get("/get-email", this.controller.read_by_email.bind(this.controller))
+        this.user_routes.post("/get-email", this.controller.read_by_email.bind(this.controller))
     }
     get_by_id_route(): void {
         this.user_routes.get("/get-id/:id", this.controller.read_by_id.bind(this.controller))
