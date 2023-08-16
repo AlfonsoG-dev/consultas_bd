@@ -131,4 +131,19 @@ export class CuentaController{
         }
     }
 
+    async delete_register(req: Request, res: Response){
+        try{ 
+            const data_req: number = parseInt(req.params.id)
+            const data_res: ResultSetHeader | undefined = await this.repository.delete_register(data_req)
+            if(data_res !== undefined){
+                res.status(200).json(data_res)
+            }else{ 
+                res.status(400).json({error: "no se puede eliminar la cuenta"})
+            }
+
+        }catch(err: CuentaControllerError){
+            throw Error(`${err} en la ruta ${req.path}`)
+        }
+    }
+
 }
