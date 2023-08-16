@@ -148,11 +148,19 @@ export class CuentaController{
     async delete_register(req: Request, res: Response){
         try{ 
             const data_req: number = parseInt(req.params.id)
-            const data_res: ResultSetHeader | undefined = await this.repository.delete_register(data_req)
-            if(data_res?.affectedRows !== undefined && data_res.affectedRows > 0){
-                res.status(200).json(data_res)
-            }else{ 
-                res.status(400).json({error: "no se puede eliminar la cuenta"})
+            const [data_user] = req.cookies['miApiCookie']
+            const buscado: CuentaTypes[] | undefined= await this.repository.read_by_id(data_req, data_user.id)
+            if(buscado === undefined){
+                res.status(400).json({error: 'invalid operation'})
+            }else if(buscado !== undefined && buscado.length === 0){
+                res.status(400).json({error: 'la cuenta no existe'})
+            }else{
+                const data_res: ResultSetHeader | undefined = await this.repository.delete_register(data_req)
+                if(data_res?.affectedRows !== undefined && data_res.affectedRows > 0){
+                    res.status(200).json(data_res)
+                }else{ 
+                    res.status(400).json({error: "no se puede eliminar la cuenta"})
+                }
             }
 
         }catch(err: CuentaControllerError){
