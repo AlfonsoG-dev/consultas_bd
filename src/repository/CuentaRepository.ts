@@ -44,7 +44,7 @@ export class CuentaRepository implements DbQueryModel{
     }
     get_cuentas_by_user(user_id: number) : Promise<CuentaTypes[] | undefined>{
         return new Promise((resolve, reject)=>{
-            this.query.execute('select nombre, email, create_at, update_at from `consulta`.cuentas where user_id=?', [user_id], function(err: QueryError | null, res: CuentaTypes[]){
+            this.query.execute('select id, nombre, email, create_at, update_at from `consulta`.cuentas where user_id=?', [user_id], function(err: QueryError | null, res: CuentaTypes[]){
                 if(err)reject(err)
                 resolve(res)
             })
@@ -52,14 +52,19 @@ export class CuentaRepository implements DbQueryModel{
     }
     read_by_email(email: string): Promise<CuentaTypes[] | undefined> {
         return new Promise((resolve, reject) =>{
-            this.query.execute('select nombre, email, create_at, update_at from `consulta`.cuentas where email=?', [email], function(err: QueryError| null, res: CuentaTypes[]){
+            this.query.execute('select nombre, email from `consulta`.cuentas where email=?', [email], function(err: QueryError| null, res: CuentaTypes[]){
                 if(err)reject(err)
                 resolve(res)
             })
         })
     }
-    read_by_name(user_name: string): Promise<CuentaTypes[] | undefined> {
-        throw new Error("Method not implemented.");
+    read_by_name(nombre: string): Promise<CuentaTypes[] | undefined> {
+        return new Promise((resolve, reject)=>{
+            this.query.execute('select nombre, email from `consulta`.cuentas where nombre = ?', [nombre], function(err: QueryError | null, res: CuentaTypes[]){
+                if(err)reject(err)
+                resolve(res)
+            })
+        })
     }
     read_by_id(user_id: number): Promise<UserTypes[] | undefined> {
         throw new Error("Method not implemented.");

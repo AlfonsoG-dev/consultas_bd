@@ -66,4 +66,20 @@ export class CuentaController{
             throw Error(`${err} en la ruta ${req.path}`)
         }
     }
+    
+    async read_by_name(req: Request, res: Response){
+        try{
+            const data_req: CuentaTypes = req.body
+            const data_res: CuentaTypes[] | undefined = await this.repository.read_by_name(data_req.nombre)
+
+            if(data_res !== undefined && data_res.length > 0){
+                res.status(200).json(data_res)
+            }else{
+                res.status(400).json({error: "la cuenta no se encuentra registrada"})
+            }
+
+        }catch(err: CuentaControllerError){
+            throw Error(`${err} en la ruta ${req.path}`)
+        }
+    }
 }
