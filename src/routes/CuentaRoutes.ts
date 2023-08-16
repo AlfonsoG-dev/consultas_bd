@@ -45,6 +45,9 @@ export class CuentaRoutes implements RoutesModel{
         this.get_by_name_route()
         this.get_by_email_route()
         this.get_by_id_route()
+        this.post_register_route()
+        this.delete_register_route()
+        this.update_register_route()
         return this.cuenta_router
     }
 }
