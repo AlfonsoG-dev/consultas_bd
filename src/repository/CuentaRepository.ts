@@ -82,7 +82,12 @@ export class CuentaRepository implements DbQueryModel{
         })
     }
     update_register(nCuenta: Cuenta): Promise<ResultSetHeader | undefined> {
-        throw new Error("Method not implemented.");
+        return new Promise((resolve, reject)=>{
+            this.query.execute('update `consutla`.cuenta set nombre=? email=? update_at=? where cuenta_id=? and user_id=?)', [nCuenta.get_nombre, nCuenta.get_email, nCuenta.get_update_at, nCuenta.get_id, nCuenta.get_user_id], function(err: QueryError | null, res: ResultSetHeader){
+                if(err)reject(err)
+                resolve(res)
+            })
+        })
     }
     delete_register(cuenta_id: number): Promise<ResultSetHeader | undefined> {
         throw new Error("Method not implemented.");
