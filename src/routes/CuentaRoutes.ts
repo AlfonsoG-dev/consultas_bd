@@ -27,7 +27,7 @@ export class CuentaRoutes implements RoutesModel{
         this.cuenta_router.get("/get-email", this.controller.read_by_email.bind(this.controller))
     }
     get_by_id_route(): void {
-        throw new Error("Method not implemented.");
+        this.cuenta_router.get("/:id", this.controller.read_by_id.bind(this.controller))
     }
     post_register_route(): void {
         throw new Error("Method not implemented.");
@@ -42,6 +42,9 @@ export class CuentaRoutes implements RoutesModel{
     get routes(): express.Router{
         this.UseMiddleware()
         this.get_all_route()
+        this.get_by_name_route()
+        this.get_by_email_route()
+        this.get_by_id_route()
         return this.cuenta_router
     }
 }
