@@ -57,7 +57,7 @@ export class UserRepository implements DbQueryModel {
     }
      read_by_id(user_id: number): Promise<UserTypes[] | undefined> {
         return new Promise((resolve, reject) => {
-            this.query.execute('select nombre, email, rol from `consulta`.users where id =?', [user_id], function (err: QueryError | null, res: UserTypes[]) {
+            this.query.execute('select id, nombre, email, rol from `consulta`.users where id =?', [user_id], function (err: QueryError | null, res: UserTypes[]) {
                 if (err) reject(err)
                 resolve(res)
             })
