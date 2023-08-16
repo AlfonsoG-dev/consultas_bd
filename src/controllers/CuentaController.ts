@@ -37,4 +37,18 @@ export class CuentaController{
             throw Error(`${err} en la ruta ${req.path}`)
         }
     }
+    async read_all(req: Request, res: Response){
+        try{
+            const [data_req] = req.cookies['miApiCookie']
+            if(data_req.rol === 'admin'){
+                const data_res = await this.repository.read_all
+                res.status(200).json(data_res)
+            }else{
+                res.status(400).json({error: "solo admin tiene acceso"})
+            }
+
+        }catch(err: CuentaControllerError){
+            throw Error(err)
+        }
+    }
 }
