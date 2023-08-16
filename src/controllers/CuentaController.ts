@@ -133,6 +133,7 @@ export class CuentaController{
                 res.status(400).json({error: 'la cuenta no se encuentra registrada'})
             }
             else{
+                nCuenta.set_id(buscado[0].id!)
                 const data_res: ResultSetHeader | undefined = await this.repository.update_register(nCuenta)
                 if(data_res?.affectedRows !== undefined && data_res.affectedRows > 0){
                     res.status(200).json(data_res)
