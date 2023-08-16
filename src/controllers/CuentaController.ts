@@ -106,7 +106,7 @@ export class CuentaController{
             const data_user = req.cookies['miApiCookie']
             const nCuenta: Cuenta = new Cuenta(data_user[0] .id,data_req.nombre, data_req.email, data_req.password, data_user[0].rol);
             const data_res: ResultSetHeader | undefined = await this.repository.insert_register(nCuenta)
-            if(data_res !== undefined){
+            if(data_res?.affectedRows !== undefined && data_res.affectedRows > 0){
                 res.status(201).json(data_res)               
             }else{
                 res.status(400).json({error: "no se puede guardar el usuario"})
@@ -121,7 +121,7 @@ export class CuentaController{
             const [data_user] = req.cookies['miApiCookie']
             const nCuenta: Cuenta = new Cuenta(data_user.id, data_req.nombre, data_req.email, data_req.password, data_user.rol)
             const data_res: ResultSetHeader | undefined = await this.repository.update_register(nCuenta)
-            if(data_res !== undefined){
+            if(data_res?.affectedRows !== undefined && data_res.affectedRows > 0){
                 res.status(200).json(data_res)
             }else{
                 res.status(400).json({error: "no se puede modificar la cuenta"})
@@ -135,7 +135,7 @@ export class CuentaController{
         try{ 
             const data_req: number = parseInt(req.params.id)
             const data_res: ResultSetHeader | undefined = await this.repository.delete_register(data_req)
-            if(data_res !== undefined){
+            if(data_res?.affectedRows !== undefined && data_res.affectedRows > 0){
                 res.status(200).json(data_res)
             }else{ 
                 res.status(400).json({error: "no se puede eliminar la cuenta"})
