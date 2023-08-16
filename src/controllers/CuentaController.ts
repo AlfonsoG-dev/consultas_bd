@@ -56,7 +56,8 @@ export class CuentaController{
     async read_by_email(req: Request, res: Response){
         try{
             const data_req: CuentaTypes = req.body
-            const data_res: CuentaRepositoryType = await this.repository.read_by_email(data_req.email)
+            const [data_user] = req.cookies['miApiCookie']
+            const data_res: CuentaRepositoryType = await this.repository.read_by_email(data_req.email, data_user.id)
             if(data_res !== undefined && data_res.length > 0){
                 res.status(200).json(data_res)
             }else{
