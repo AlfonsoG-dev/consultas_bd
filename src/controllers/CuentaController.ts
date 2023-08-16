@@ -115,4 +115,11 @@ export class CuentaController{
             throw Error(`${err} en la ruta ${req.path}`)
         }
     }
+    async update_register(req: Request, res: Response){
+        try{
+        }catch(err: CuentaControllerError){
+            throw Error(`${err} en la ruata ${req.path}`)
+        }
+    }
+
 }
