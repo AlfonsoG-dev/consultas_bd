@@ -1,6 +1,6 @@
 import {Client} from"ssh2"
 import mysql, {Connection, QueryError} from "mysql2"
-import { DbConfig } from "../Models/DBConfig"
+import { DbConfig } from "../configs/DBConfig"
 
 export class SSHConection{
     private client: Client;

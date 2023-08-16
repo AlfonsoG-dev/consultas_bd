@@ -2,7 +2,7 @@ import express, {Express, Request, Response} from "express"
 import cors from "cors"
 import { UserRoutes} from "./routes/UserRoutes";
 import { CuentaRoutes } from "./routes/CuentaRoutes";
-import { ServerApiEnum } from "./Models/ServerEnums";
+import { ServerApiEnum } from "./configs/ServerEnums";
 import cookieParser from "cookie-parser";
 import {AuthMiddleware} from "./middlewares/AuthMiddleware";
 
@@ -32,7 +32,7 @@ class ServerApi{
 
     UseRoutes(){
         this.app.use("/user", this.user_routes.routes)
-        this.app.use("/cuenta", this.cuenta_router.routes)
+        //this.app.use("/cuenta", this.cuenta_router.routes)
     }
 
     get init(){

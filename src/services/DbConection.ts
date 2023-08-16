@@ -1,5 +1,5 @@
 import mysql, { Connection, Pool } from "mysql2"
-import { DbConfig } from "../Models/DBConfig";
+import { DbConfig } from "../configs/DBConfig";
 import { SSHConection } from "./SSHConection";
 export class DbConection {
     private conection: typeof mysql;
