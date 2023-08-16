@@ -1,10 +1,16 @@
 import {Client} from"ssh2"
 import mysql, {Connection, QueryError} from "mysql2"
 import { DbConfig } from "../configs/DBConfig"
+import { ServerApiEnum } from "../configs/ServerEnums";
 
 export class SSHConection{
     private client: Client;
     private dbServer: DbConfig;
+    private ssh_user: Readonly<string> = ServerApiEnum.USER_SSH
+    private ssh_port: Readonly<number> = ServerApiEnum.SSH_PORT
+    private ssh_host: Readonly<string> = ServerApiEnum.HOST_SSH
+    private ssh_password: Readonly<string> = ServerApiEnum.PASSWORD_USER_SSH
+    private ssh_db_host: Readonly<string> = ServerApiEnum.HOST
     constructor(){
         this.client = new Client()
         this.dbServer = new DbConfig()
@@ -12,16 +18,16 @@ export class SSHConection{
 
     get tunel_config(){
         return {
-            host: '192.168.2.114',
-            port: 22,
-            username: 'server',
-            password: '{alf}'
+            host: this.ssh_host,
+            port: this.ssh_port,
+            username: this.ssh_user,
+            password: this.ssh_password
         }
     }
 
     forward_config(dbServer: any){
         return {
-            srcHost: '127.0.0.1',
+            srcHost: this.ssh_db_host,
             srcPort: 3306,
             dstHost: dbServer.host,
             dstPort: dbServer.port

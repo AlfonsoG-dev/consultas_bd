@@ -35,7 +35,7 @@ export class DbConfig {
             port: 3306,
             user: this.ssh_user_db,
             password: this.ssh_user_password_db,
-            database: 'consuta'
+            database: 'test_db'
         }
     }
 }

@@ -26,3 +26,16 @@ export class DbConection {
         })
     }
 }
+const mydb = new DbConection()
+
+const res = async() =>{
+    return new Promise((resolve, reject)=>{
+        mydb.ssh_conection().then((conn: Connection) =>{
+            conn.query('select * from objetos', function(err, res){
+                if(err)reject(err)
+                resolve(res)
+            })
+        })
+    })
+}
+res().then((rs) => console.log(rs))
