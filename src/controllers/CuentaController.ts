@@ -105,7 +105,7 @@ export class CuentaController{
             const data_req: CuentaTypes = req.body
             const data_user = req.cookies['miApiCookie']
             const nCuenta: Cuenta = new Cuenta(data_user[0] .id,data_req.nombre, data_req.email, data_req.password, data_user[0].rol);
-            const buscado: CuentaTypes[] | undefined = await this.repository.read_by_user_id(data_user.id, nCuenta.get_nombre, nCuenta.get_email)
+            const buscado: CuentaTypes[] | undefined = await this.repository.read_by_user_id(data_user[0].id, nCuenta.get_nombre, nCuenta.get_email)
             if(buscado !== undefined && buscado.length > 0){
                 res.status(400).json({erro: 'la cuenta ya se encuentra registrada'})
             }else{
@@ -133,7 +133,7 @@ export class CuentaController{
                 res.status(400).json({error: 'la cuenta no se encuentra registrada'})
             }
             else{
-                nCuenta.set_id(buscado[0].id!)
+                nCuenta.set_id(data_req.cuenta_id!)
                 const data_res: ResultSetHeader | undefined = await this.repository.update_register(nCuenta)
                 if(data_res?.affectedRows !== undefined && data_res.affectedRows > 0){
                     res.status(200).json(data_res)
