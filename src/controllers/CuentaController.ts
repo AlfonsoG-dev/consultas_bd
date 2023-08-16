@@ -27,7 +27,7 @@ export class CuentaController{
     async read_all_by_user(req: Request, res:Response){
         try{
             const data_req = req.cookies['miApiCookie']
-            const data_res: CuentaTypes[] | undefined = await this.repository.get_cuentas_by_user(data_req[0].id);
+            const data_res: CuentaRepositoryType = await this.repository.get_cuentas_by_user(data_req[0].id);
                 if(data_res !== undefined && data_res?.length > 0){
                     res.status(200).json(data_res)
                 }else{
@@ -41,7 +41,7 @@ export class CuentaController{
         try{
             const [data_req] = req.cookies['miApiCookie']
             if(data_req.rol === 'admin'){
-                const data_res: CuentaTypes[] | undefined = await this.repository.read_all
+                const data_res: CuentaRepositoryType = await this.repository.read_all
                 res.status(200).json(data_res)
             }else{
                 res.status(400).json({error: "solo admin tiene acceso"})
@@ -55,7 +55,7 @@ export class CuentaController{
     async read_by_email(req: Request, res: Response){
         try{
             const data_req: CuentaTypes = req.body
-            const data_res: CuentaTypes[] | undefined = await this.repository.read_by_email(data_req.email)
+            const data_res: CuentaRepositoryType = await this.repository.read_by_email(data_req.email)
             if(data_res !== undefined && data_res.length > 0){
                 res.status(200).json(data_res)
             }else{
@@ -70,7 +70,7 @@ export class CuentaController{
     async read_by_name(req: Request, res: Response){
         try{
             const data_req: CuentaTypes = req.body
-            const data_res: CuentaTypes[] | undefined = await this.repository.read_by_name(data_req.nombre)
+            const data_res: CuentaRepositoryType = await this.repository.read_by_name(data_req.nombre)
 
             if(data_res !== undefined && data_res.length > 0){
                 res.status(200).json(data_res)
