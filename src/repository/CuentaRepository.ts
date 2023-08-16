@@ -99,7 +99,7 @@ export class CuentaRepository implements DbQueryModel{
     }
     delete_register(cuenta_id: number): Promise<ResultSetHeader | undefined> {
         return new Promise((resolve, reject)=>{
-            this.query.execute('delete `consulta`.cuentas where cuenta_id=?', [cuenta_id], function(err: QueryError | null, res: ResultSetHeader){
+            this.query.execute('delete from `consulta`.cuentas where cuenta_id=?', [cuenta_id], function(err: QueryError | null, res: ResultSetHeader){
                 if(err)reject(err)
                 resolve(res)
             })
