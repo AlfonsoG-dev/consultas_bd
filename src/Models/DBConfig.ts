@@ -1,4 +1,5 @@
 import { ServerApiEnum } from "./ServerEnums";
+import { ConnectionOptions } from "mysql2";
 
 export class DbConfig {
     private host: Readonly<string> = ServerApiEnum.HOST;
@@ -11,14 +12,14 @@ export class DbConfig {
     private connection_limit: Readonly<number> = ServerApiEnum.CONECTION_LIMIT;
     private queue_limit: Readonly<number> = ServerApiEnum.QUEUE_LIMIT;
 
-    get normal_config() {
+    get normal_config(): ConnectionOptions {
         return {
             host: this.host,
             user: this.user_test,
             password: this.password_1
         }
     }
-    get pool_config() {
+    get pool_config():ConnectionOptions {
         return {
             host: this.host,
             user: this.user_root,
@@ -28,7 +29,7 @@ export class DbConfig {
             queueLimit: this.queue_limit
         }
     }
-    get db_server_config() {
+    get db_server_config(): ConnectionOptions {
         return {
             host: this.host,
             port: 3306,
