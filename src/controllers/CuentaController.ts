@@ -1,6 +1,7 @@
 import { CuentaRepository } from "../repository/CuentaRepository";
 import { CuentaTypes, Cuenta } from "../Models/Cuenta";
 import { Request, Response, NextFunction } from "express";
+import {ResultSetHeader} from "mysql2";
 
 
 type CuentaControllerError = Error | any | unknown
@@ -91,6 +92,22 @@ export class CuentaController{
                 res.status(200).json(data_res)
             }else{
                 res.status(400).json({error: "no se encuentra la cuenta"})
+            }
+        }catch(err: CuentaControllerError){
+            throw Error(`${err} en la ruta ${req.path}`)
+        }
+    }
+
+    async insert_register(req: Request, res: Response){
+        try{
+            const data_req: CuentaTypes = req.body
+            const data_user = req.cookies['miApiCookie']
+            const nCuenta: Cuenta = new Cuenta(data_user.id,data_req.nombre, data_req.email, data_req.password, data_user.rol);
+            const data_res: ResultSetHeader | undefined = await this.repository.insert_register(nCuenta)
+            if(data_res !== undefined){
+                res.status(201).json(data_res)               
+            }else{
+                res.status(400).json({error: "no se puede guardar el usuario"})
             }
         }catch(err: CuentaControllerError){
             throw Error(`${err} en la ruta ${req.path}`)
