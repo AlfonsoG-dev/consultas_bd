@@ -30,7 +30,7 @@ export class CuentaRoutes implements RoutesModel{
         this.cuenta_router.get("/:id", this.controller.read_by_id.bind(this.controller))
     }
     post_register_route(): void {
-        throw new Error("Method not implemented.");
+        this.cuenta_router.post("/post-cuenta", this.controller.insert_register.bind(this.controller))
     }
     delete_register_route(): void {
         throw new Error("Method not implemented.");
@@ -45,7 +45,7 @@ export class CuentaRoutes implements RoutesModel{
         this.get_by_name_route()
         this.get_by_email_route()
         this.get_by_id_route()
-        //this.post_register_route()
+        this.post_register_route()
         //this.delete_register_route()
         //this.update_register_route()
         return this.cuenta_router
