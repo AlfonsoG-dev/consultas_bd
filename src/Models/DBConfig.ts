@@ -1,5 +1,5 @@
 import { ServerApiEnum } from "./ServerEnums";
-import { ConnectionOptions } from "mysql2";
+import { ConnectionOptions, PoolOptions } from "mysql2";
 
 export class DbConfig {
     private host: Readonly<string> = ServerApiEnum.HOST;
@@ -19,7 +19,7 @@ export class DbConfig {
             password: this.password_1
         }
     }
-    get pool_config():ConnectionOptions {
+    get pool_config():PoolOptions {
         return {
             host: this.host,
             user: this.user_root,
