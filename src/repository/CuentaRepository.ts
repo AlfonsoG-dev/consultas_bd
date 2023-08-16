@@ -17,7 +17,6 @@ export class CuentaRepository implements DbQueryModel{
         })
     }
     verificate_table(): Promise<ResultSetHeader | undefined> {
-        //TODO: verificar si cumple
         return new Promise((resolve, reject)=>{
             this.query.execute('create table if not exists cuentas(id int not null unique primary key auto_increment, nombre varchar(100) not null, email varchar(100) not null, user_id int not null, create_at datetime not null, update_at datetime, foreign key(user_id) references `consulta`.`users`(id) on delete cascade on update cascade)', function(err: QueryError | null, res: ResultSetHeader | undefined){
                 if(err)reject(err)
@@ -62,6 +61,15 @@ export class CuentaRepository implements DbQueryModel{
             this.query.execute('select nombre, email from `consulta`.cuentas where nombre = ? and user_id=?', [nombre, id], function(err: QueryError | null, res: CuentaTypes[]){
                 if(err)reject(err)
                 resolve(res)
+            })
+        })
+    }
+
+    read_by_user_id(user_id: number, nombre: string, email: string){
+        return new Promise((resolve, reject)=>{
+            this.query.execute('select nombre, email from `consulta`.cuentas where user_id=? && nombre=? || email =?', [user_id, nombre, email], function(err: QueryError | null, res: CuentaTypes[]){
+                if(err) reject(err)
+                resolve(err)
             })
         })
     }

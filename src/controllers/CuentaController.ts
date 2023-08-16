@@ -105,11 +105,17 @@ export class CuentaController{
             const data_req: CuentaTypes = req.body
             const data_user = req.cookies['miApiCookie']
             const nCuenta: Cuenta = new Cuenta(data_user[0] .id,data_req.nombre, data_req.email, data_req.password, data_user[0].rol);
-            const data_res: ResultSetHeader | undefined = await this.repository.insert_register(nCuenta)
-            if(data_res?.affectedRows !== undefined && data_res.affectedRows > 0){
-                res.status(201).json(data_res)               
+            const buscado: CuentaTypes[] | undefined = await this.repository.read_by_user_id(data_user.id, nCuenta.get_nombre, nCuenta.get_email)
+            if(buscado !== undefined && buscado.length > 0){
+                res.status(400).json({erro: 'la cuenta ya se encuentra registrada'})
             }else{
-                res.status(400).json({error: "no se puede guardar el usuario"})
+
+                const data_res: ResultSetHeader | undefined = await this.repository.insert_register(nCuenta)
+                if(data_res?.affectedRows !== undefined && data_res.affectedRows > 0){
+                    res.status(201).json(data_res)               
+                }else{
+                    res.status(400).json({error: "no se puede guardar el usuario"})
+                }
             }
         }catch(err: CuentaControllerError){
             throw Error(`${err} en la ruta ${req.path}`)
