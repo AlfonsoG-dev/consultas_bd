@@ -28,7 +28,7 @@ export class AuthMiddleware {
                 }
             }
         }catch(err: ErrorTypes){
-            throw Error(`${err} en la ruta ${req.path}`)
+            res.status(400).json({error: `${err} en la ruta ${req.path}`})
         }
     }
 
@@ -42,7 +42,7 @@ export class AuthMiddleware {
                 res.status(400).json({error: "no autenticado"})
             }
         }catch(err: ErrorTypes){
-            throw Error(`${err} en la ruta ${req.path}`)
+            res.status(400).json({error: `${err} en la ruta ${req.path}`})
         }
     }
 
@@ -56,7 +56,7 @@ export class AuthMiddleware {
                 res.status(400).json({error: "solo admin puede acceder a este sitio"})
             }
         }catch(err: ErrorTypes){
-            throw Error(`${err} en la ruta ${req.path}`)
+            res.status(400).json({error: `${err} en la ruta ${req.path}`})
         }
     }
 }
