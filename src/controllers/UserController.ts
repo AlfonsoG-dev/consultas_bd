@@ -7,7 +7,10 @@ type UserControllerError = Error | any | unknown
 type UserRepositoryType = UserTypes[] | undefined
 
 export class UserController {
-    private repository: UserRepository = new UserRepository();
+    private repository: UserRepository;
+    constructor(){
+        this.repository = new UserRepository();
+    }
 
     async verificate_data_user(req: Request, res: Response, next: NextFunction){
         try{

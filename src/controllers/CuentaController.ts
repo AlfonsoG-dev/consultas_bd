@@ -10,8 +10,11 @@ type CuentaRepositoryType = CuentaTypes[] | undefined
 
 export class CuentaController{
 
-    private repository: CuentaRepository = new CuentaRepository();
+    private repository: CuentaRepository;
 
+    constructor(){
+        this.repository = new CuentaRepository();
+    }
     async verificate_data_cuenta(req: Request, res: Response, next: NextFunction){
         try{
             const data_res = Promise.all([this.repository.verificate_database(), this.repository.select_database(), this.repository.verificate_table()])

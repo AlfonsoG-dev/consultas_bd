@@ -4,7 +4,10 @@ import { ResultSetHeader, QueryError, Connection } from "mysql2";
 import {DbQueryModel} from "../Models/DbQueryModel";
 
 export class CuentaRepository implements DbQueryModel{
-    private query: Connection = new DbConection().normal_connection;
+    private query: Connection;
+    constructor(){
+        this.query = new DbConection().normal_connection
+    }
     verificate_database(): Promise<ResultSetHeader | undefined> {
         return new Promise((resolve, reject)=>{
             this.query.execute('create database if not exists consulta', function(err: QueryError | null, res: ResultSetHeader | undefined){
