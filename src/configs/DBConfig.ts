@@ -19,23 +19,24 @@ export class DbConfig {
             password: this.password_1
         }
     }
-    get pool_config():PoolOptions {
+    pool_config(db_name: string = ''):PoolOptions {
         return {
             host: this.host,
             user: this.user_root,
             password: this.password_2,
             connectionLimit: this.connection_limit,
+            database: db_name,
             maxIdle: this.connection_limit,
             queueLimit: this.queue_limit
         }
     }
-    get db_server_config(): ConnectionOptions {
+    db_server_config(db_name: string = ''): ConnectionOptions {
         return {
             host: this.host,
             port: 3306,
             user: this.ssh_user_db,
             password: this.ssh_user_password_db,
-            database: 'test_db'
+            database: db_name
         }
     }
 }

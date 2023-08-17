@@ -21,7 +21,7 @@ export class CuentaController{
             console.log(await data_res)
             next()
         }catch(err: CuentaControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
 
@@ -35,7 +35,7 @@ export class CuentaController{
                     res.status(400).json({error: "no hay cuentas"})
                 }
         }catch(err: CuentaControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
     async read_all(req: Request, res: Response){
@@ -49,7 +49,7 @@ export class CuentaController{
             }
 
         }catch(err: CuentaControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
 
@@ -65,7 +65,7 @@ export class CuentaController{
             }
 
         }catch(err: CuentaControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
     
@@ -82,7 +82,7 @@ export class CuentaController{
             }
 
         }catch(err: CuentaControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
     async read_by_id(req: Request, res: Response){
@@ -96,7 +96,7 @@ export class CuentaController{
                 res.status(400).json({error: "no se encuentra la cuenta"})
             }
         }catch(err: CuentaControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
 
@@ -118,7 +118,7 @@ export class CuentaController{
                 }
             }
         }catch(err: CuentaControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
     async update_register(req: Request, res: Response){
@@ -142,7 +142,7 @@ export class CuentaController{
                 }
             }
         }catch(err: CuentaControllerError){
-            res.status(400).json({error: `${err} en la ruata ${req.path}`})
+            throw Error(`${err} en la ruata ${req.path}`)
         }
     }
 
@@ -165,7 +165,7 @@ export class CuentaController{
             }
 
         }catch(err: CuentaControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
 

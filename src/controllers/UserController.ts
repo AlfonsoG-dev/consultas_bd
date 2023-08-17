@@ -18,7 +18,7 @@ export class UserController {
             console.log(await data_res)
             next()
         }catch(err: UserControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
     async read_all(req: Request, res: Response){
@@ -30,7 +30,7 @@ export class UserController {
                 res.status(400).json({error: "no se puden obtener los datos"})
             }
         }catch(err: UserControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
     async read_by_name(req: Request, res: Response){
@@ -44,7 +44,7 @@ export class UserController {
             }
 
         }catch(err: UserControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`});
+            throw Error(`${err} en la ruta ${req.path}`);
         }
     }
 
@@ -58,7 +58,7 @@ export class UserController {
                 res.status(400).json({error: "el usuario no existe"})
             }
         }catch(err: UserControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
     async read_by_id(req: Request, res: Response){
@@ -71,7 +71,7 @@ export class UserController {
                 res.status(400).json({error: "usuario no encontrado"})
             }
         }catch(err: UserControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
     async insert_user(req: Request, res: Response){
@@ -87,7 +87,7 @@ export class UserController {
             }
 
         }catch(err: UserControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
     async update_user(req: Request, res: Response){
@@ -107,7 +107,7 @@ export class UserController {
                 }
             }
         }catch(err: UserControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
 
@@ -123,7 +123,7 @@ export class UserController {
                 res.status(400).json({error: "no se puede eliminar un usuario que no existe"})
             }
         }catch(err: UserControllerError){
-            res.status(400).json({error: `${err} en la ruta ${req.path}`})
+            throw Error(`${err} en la ruta ${req.path}`)
         }
     }
 }
