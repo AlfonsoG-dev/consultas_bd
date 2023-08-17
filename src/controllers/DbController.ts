@@ -7,7 +7,7 @@ export class DbController extends DbConection{
     private cursor;
     constructor(){
         super();
-        this.cursor = super.normal_connection;
+        this.cursor = super.pool_connection('consulta');
     }
     any_execute(sql: string, ...args: any): Promise<T>{
         return new Promise((resolve, reject)=>{

@@ -13,14 +13,14 @@ export class DbConection {
     get normal_connection(): Connection {
         return this.conection.createConnection(this.db_config.normal_config)
     }
-    get pool_connection(): Pool {
-        return this.conection.createPool(this.db_config.pool_config)
+    pool_connection(db_name: string = ''): Pool {
+        return this.conection.createPool(this.db_config.pool_config(db_name))
     }
 
-    async ssh_conection(): Promise<Connection>{
+    async ssh_conection(db_name: string = ''): Promise<Connection>{
         const ssh = this.db_ssh
         return new Promise((resolve, reject)=>{
-            const conn = ssh.ssh_conection()
+            const conn = ssh.ssh_conection(db_name)
             conn.then((result) => resolve(result))
             conn.catch((err)=>reject(err))
         })
