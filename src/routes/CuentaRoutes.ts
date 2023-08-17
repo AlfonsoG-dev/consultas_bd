@@ -14,8 +14,8 @@ export class CuentaRoutes implements RoutesModel{
     }
     UseMiddleware(){
         //verificate the user login
-        this.cuenta_router.use( this.autenticate_user.verificar_autenticacion.bind(this.autenticate_user))
         this.cuenta_router.use(this.controller.verificate_data_cuenta.bind(this.controller))
+        this.cuenta_router.use( this.autenticate_user.verificar_autenticacion.bind(this.autenticate_user))
     }
     get_all_route(): void {
         this.cuenta_router.get("/", this.controller.read_all_by_user.bind(this.controller))

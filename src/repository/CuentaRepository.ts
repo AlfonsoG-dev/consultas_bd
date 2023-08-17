@@ -18,7 +18,7 @@ export class CuentaRepository implements DbQueryModel{
     }
     verificate_table(): Promise<ResultSetHeader | undefined> {
         return new Promise((resolve, reject)=>{
-            this.con.any_execute('create table if not exists cuentas(id int not null unique primary key auto_increment, nombre varchar(100) not null, email varchar(100) not null, user_id int not null, create_at datetime not null, update_at datetime) references `consulta`.`users`(id) on delete cascade on update cascade)')
+            this.con.any_execute('create table if not exists cuentas(cuenta_id int not null unique primary key auto_increment, nombre varchar(100) not null, email varchar(100) not null, user_id int not null, create_at datetime not null, update_at datetime, foreign key(user_id) references `consulta`.`users`(id) on delete cascade on update cascade)')
             .then((res) => resolve(res))
             .catch((err) => reject(err))
         })
