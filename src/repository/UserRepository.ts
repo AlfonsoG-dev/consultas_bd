@@ -2,99 +2,92 @@ import mysql, {QueryError, ResultSetHeader} from "mysql2"
 import { UserTypes, User} from "../Models/User";
 import {DbQueryModel} from "../Models/DbQueryModel";
 import { DbConection } from "../services/DbConection";
+import {DbController} from "../controllers/DbController";
 export class UserRepository implements DbQueryModel {
     private query: mysql.Connection;
+    private con;
     constructor() {
         this.query = new DbConection().normal_connection
+        this.con = new DbController();
+
     }
     verificate_database(): Promise<ResultSetHeader | undefined> {
         return new Promise((resolve, reject)=>{
-            this.query.execute('create database if not exists consulta', function(err: QueryError | null, res: ResultSetHeader | undefined){
-                if(err)reject(err)
-                resolve(res)
-            })
+            this.con.any_execute('create database if not exists consulta')
+            .then((res) => resolve(res))
+            .catch((err) => reject(err))
         })
     }
     select_database(): Promise<mysql.ResultSetHeader | undefined> {
         return new Promise((resolve, reject)=>{
-            this.query.query('use consulta', function(err: QueryError | null, res: ResultSetHeader | undefined){
-                if(err)reject(err)
-                resolve(res)
-            })
+            this.con.any_query('use consulta')
+            .then((res) => resolve(res))
+            .catch((err) => reject(err))
         })
     }
     verificate_table(): Promise<mysql.ResultSetHeader | undefined> {
         return new Promise((resolve, reject)=>{
-            this.query.execute('create table if not exists users(id int not null unique primary key auto_increment, nombre varchar(100) not null unique, email varchar(100) not null unique, password varchar(100) not null, rol varchar(50), create_at datetime, update_at datetime)', function(err: QueryError | null, res: ResultSetHeader | undefined){
-                if(err) reject(err)
-                resolve(res)
-            })
+            this.con.any_execute('create table if not exists users(id int not null unique primary key auto_increment, nombre varchar(100) not null unique, email varchar(100) not null unique, password varchar(100) not null, rol varchar(50), create_at datetime, update_at datetime)')
+            .then((res) => resolve(res))
+            .catch((err) => reject(err))
         })
     }
      get read_all(): Promise<UserTypes[] | undefined> {
         return new Promise((resolve, reject) => {
-            this.query.execute('select id, nombre, email from `consulta`.users', (err: QueryError | null, res: UserTypes[]) => {
-                if (err) reject(err)
-                resolve(res)
-            })
+            this.con.any_execute('select id, nombre, email from `consulta`.users')
+            .then((res) => resolve(res))
+            .catch((err) => reject(err))
         })
     }
      read_by_name(user_name: string): Promise<UserTypes[] | undefined> {
         return new Promise((resolve, reject) => {
-            this.query.execute('select nombre, email from `consulta`.users where nombre = ?', [user_name], function (err: QueryError | null, res: UserTypes[]) {
-                if (err) reject(err)
-                resolve(res)
-            })
+            this.con.any_execute('select nombre, email from `consulta`.users where nombre = ?', user_name)
+            .then((res) => resolve(res))
+            .catch((err) => reject(err))
         })
     }
     read_by_email(user_email: string): Promise<UserTypes[] | undefined> {
         return new Promise((resolve, reject) =>{
-            this.query.execute('select nombre, email from `consulta`.users where email=?', [user_email], function(err: QueryError | null, res: UserTypes[]){
-                if(err)reject(err)
-                resolve(res)
-            })
+            this.con.any_execute('select nombre, email from `consulta`.users where email=?', user_email)
+            .then((res) => resolve(res))
+            .catch((err) => reject(err))
         })
     }
      read_by_id(user_id: number): Promise<UserTypes[] | undefined> {
         return new Promise((resolve, reject) => {
-            this.query.execute('select nombre, email, rol from `consulta`.users where id =?', [user_id], function (err: QueryError | null, res: UserTypes[]) {
-                if (err) reject(err)
-                resolve(res)
-            })
+            this.con.any_execute('select nombre, email, rol from `consulta`.users where id =?', user_id)
+            .then((res) => resolve(res))
+            .catch((err) => reject(err))
+            
         })
     }
      insert_register(nUser: Omit<User, "get_update_at" | "get_id" | "set_id">): Promise<ResultSetHeader | undefined> {
          //TODO: la fecha deberia ser pasada por la request o por el objeto user
         return new Promise((resolve, reject) => {
-            this.query.execute('insert into `consulta`.users (nombre, email, password, rol, create_at) values (?, ?, ?, ?, ?)', [nUser.get_nombre, nUser.get_email, nUser.get_password, nUser.get_rol, nUser.get_create_at], function (err: QueryError | null, res: ResultSetHeader) {
-                if (err) reject(err)
-                resolve(res)
-            })
-
+            this.con.any_execute('insert into `consulta`.users (nombre, email, password, rol, create_at) values (?, ?, ?, ?, ?)', nUser.get_nombre, nUser.get_email, nUser.get_password, nUser.get_rol, nUser.get_create_at)
+            .then((res) => resolve(res))
+            .catch((err) => reject(err))
         })
     }
      update_register (nUser: Omit<User, "get_password" | "get_create_at" | "get_rol" | "set_id">): Promise<ResultSetHeader | undefined> {
         return new Promise((resolve, reject) => {
-            this.query.execute('update `consulta`.users set nombre = ?, email = ?, update_at = ? where id=?', [nUser.get_nombre, nUser.get_email, nUser.get_update_at, nUser.get_id], function (err: QueryError | null, res: ResultSetHeader) {
-                if (err) reject(err)
-                resolve(res)
-            })
+            this.con.any_execute('update `consulta`.users set nombre = ?, email = ?, update_at = ? where id=?', nUser.get_nombre, nUser.get_email, nUser.get_update_at, nUser.get_id)                
+            .then((res) => resolve(res))
+            .catch((err) => reject(err))
         })
     }
      delete_register (user_id: number): Promise<ResultSetHeader | undefined> {
         return new Promise((resolve, reject) => {
-            this.query.execute('delete from `consulta`.users where id = ?', [user_id], function (err: QueryError | null, res: ResultSetHeader) {
-                if (err) reject(err)
-                resolve(res)
-            })
+            this.con.any_execute('delete from `consulta`.users where id = ?', user_id)
+            .then((res) => resolve(res))
+            .catch((err) => reject(err))
         })
     }
-    autenticate_credentials (nUser: Omit<User, "get_create_at" | "get_update_at" | "get_id" | "get_rol" | "set_id">): Promise<UserTypes[] | undefined>{
-        return new Promise((resolve, reject) => {
-            this.query.execute('select id, nombre, email, rol from `consulta`.users where nombre=? or email=? and password =?', [nUser.get_nombre, nUser.get_email, nUser.get_password], function(err: QueryError | null, res: UserTypes[]){
-                if(err)reject(err)
-                resolve(res)
-            })
+    async autenticate_credentials (nUser: User): Promise<UserTypes[] | undefined>{
+          return new Promise((resolve, reject)=>{
+              this.con.any_execute('select id, nombre, email, rol from `consulta`.users where nombre=? or email=? and password =?', nUser.get_nombre, nUser.get_email, nUser.get_password)
+              .then((res) => resolve(res))
+              .catch((err) => reject(err))
         })
     }
 }
