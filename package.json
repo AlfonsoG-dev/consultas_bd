@@ -4,7 +4,7 @@
     "description": "para probar formas de consultar a bd",
     "main": "ServerApi.ts",
     "scripts": {
-        "start": "ts-node-dev src/ServerApi.ts"
+        "start": "ts-node-dev --respawn src/ServerApi.ts"
     },
     "author": "alfonso gomajoa",
     "license": "ISC",
