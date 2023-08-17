@@ -63,7 +63,7 @@ export class UserRepository implements DbQueryModel {
             })
         })
     }
-     insert_register(nUser: User): Promise<ResultSetHeader | undefined> {
+     insert_register(nUser: Omit<User, "get_update_at" | "get_id" | "set_id">): Promise<ResultSetHeader | undefined> {
          //TODO: la fecha deberia ser pasada por la request o por el objeto user
         return new Promise((resolve, reject) => {
             this.query.execute('insert into `consulta`.users (nombre, email, password, rol, create_at) values (?, ?, ?, ?, ?)', [nUser.get_nombre, nUser.get_email, nUser.get_password, nUser.get_rol, nUser.get_create_at], function (err: QueryError | null, res: ResultSetHeader) {
@@ -73,7 +73,7 @@ export class UserRepository implements DbQueryModel {
 
         })
     }
-     update_register (nUser: User): Promise<ResultSetHeader | undefined> {
+     update_register (nUser: Omit<User, "get_password" | "get_create_at" | "get_rol" | "set_id">): Promise<ResultSetHeader | undefined> {
         return new Promise((resolve, reject) => {
             this.query.execute('update `consulta`.users set nombre = ?, email = ?, update_at = ? where id=?', [nUser.get_nombre, nUser.get_email, nUser.get_update_at, nUser.get_id], function (err: QueryError | null, res: ResultSetHeader) {
                 if (err) reject(err)
@@ -89,7 +89,7 @@ export class UserRepository implements DbQueryModel {
             })
         })
     }
-    autenticate_credentials (nUser: User): Promise<UserTypes[] | undefined>{
+    autenticate_credentials (nUser: Omit<User, "get_create_at" | "get_update_at" | "get_id" | "get_rol" | "set_id">): Promise<UserTypes[] | undefined>{
         return new Promise((resolve, reject) => {
             this.query.execute('select id, nombre, email, rol from `consulta`.users where nombre=? or email=? and password =?', [nUser.get_nombre, nUser.get_email, nUser.get_password], function(err: QueryError | null, res: UserTypes[]){
                 if(err)reject(err)
