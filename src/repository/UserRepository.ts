@@ -1,13 +1,10 @@
-import mysql, {QueryError, ResultSetHeader} from "mysql2"
+import mysql, {ResultSetHeader} from "mysql2"
 import { UserTypes, User} from "../Models/User";
 import {DbQueryModel} from "../Models/DbQueryModel";
-import { DbConection } from "../services/DbConection";
 import {DbController} from "../controllers/DbController";
 export class UserRepository implements DbQueryModel {
-    private query: mysql.Connection;
     private con;
     constructor() {
-        this.query = new DbConection().normal_connection
         this.con = new DbController();
 
     }
