@@ -3,10 +3,7 @@ import { UserTypes, User} from "../Models/User";
 import {DbQueryModel} from "../Models/DbQueryModel";
 import { DbConection } from "../services/DbConection";
 export class UserRepository implements DbQueryModel {
-    private query: mysql.Connection;
-    constructor(){
-        this.query = new DbConection().normal_connection;
-    }
+    private query: mysql.Connection = new DbConection().normal_connection;
     verificate_database(): Promise<ResultSetHeader | undefined> {
         return new Promise((resolve, reject)=>{
             this.query.execute('create database if not exists consulta', function(err: QueryError | null, res: ResultSetHeader | undefined){
