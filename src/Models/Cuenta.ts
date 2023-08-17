@@ -12,7 +12,7 @@ export class Cuenta extends User{
         this.user_id = user_id
     }
 
-    get get_user_id(){
+    public get get_user_id(){
         return this.user_id
     }
 
