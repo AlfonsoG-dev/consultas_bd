@@ -1,11 +1,7 @@
 import {User, UserTypes} from "./User";
 
 export interface CuentaTypes extends UserTypes{
-    id?: number
     user_id: number
-    nombre: string
-    email: string
-    password: string
 }
 
 export class Cuenta extends User{
