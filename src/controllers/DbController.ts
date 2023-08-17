@@ -3,10 +3,11 @@ import { DbConection } from "../services/DbConection";
 
 //tipo de dato para la consulta
 type T= any
-export class DbController{
+export class DbController extends DbConection{
     private cursor;
     constructor(){
-        this.cursor = new DbConection().normal_connection;
+        super();
+        this.cursor = super.normal_connection;
     }
     any_execute(sql: string, ...args: any): Promise<T>{
         return new Promise((resolve, reject)=>{
