@@ -34,8 +34,8 @@ export class SSHConection{
 
         }
     }
-    ssh_conection(db_name: string = ''):Promise<Connection>{
-        const db_server = this.dbServer.db_server_config(db_name)
+    ssh_conection():Promise<Connection>{
+        const db_server = this.dbServer.db_server_config()
         const tunel = this.tunel_config
         const forward = this.forward_config(db_server)
 

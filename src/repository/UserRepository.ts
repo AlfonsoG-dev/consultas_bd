@@ -24,7 +24,7 @@ export class UserRepository implements DbQueryModel {
     }
     verificate_table(): Promise<mysql.ResultSetHeader | undefined> {
         return new Promise((resolve, reject)=>{
-            this.cursor.any_execute('create table if not exists users(id int not null unique primary key auto_increment, nombre varchar(100) not null unique, email varchar(100) not null unique, password varchar(100) not null, rol varchar(50), create_at datetime, update_at datetime)')
+            this.cursor.any_execute('create table if not exists `consulta`.users(id int not null unique primary key auto_increment, nombre varchar(100) not null unique, email varchar(100) not null unique, password varchar(100) not null, rol varchar(50), create_at datetime, update_at datetime)')
             .then((res) => resolve(res))
             .catch((err) => reject(err))
         })
