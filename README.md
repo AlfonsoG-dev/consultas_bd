@@ -39,5 +39,5 @@ export enum ServerApiEnum{
 
 ## Uso e instalación
 
->>- revisar las el archivo `package.json` para verificar las dependencias de nodejs
+>>- revisar el archivo `package.json` para verificar las dependencias de nodejs
 >>- instalar las dependencias con el comando: `npm istall`
