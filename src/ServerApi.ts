@@ -28,6 +28,9 @@ class ServerApi{
         this.app.use(function(req, res){
             res.status(404).json({error: "página no disponible"})
         })
+        this.app.use(function(err, req: Request, res: Response){
+            if(err)res.status(400).clearCookie('miApiCookie')
+        })
     }
 
     UseRoutes(){
