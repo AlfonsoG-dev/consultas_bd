@@ -8,6 +8,8 @@
 ## dependencias externas
 >- [mysql-server v:8.1.0](https://dev.mysql.com/downloads/mysql/)
 >- [mysql-server linux](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04-es)
+>>- [nodejs v:18.17.0](https://nodejs.org/es)
+>>- [openssh for windows](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_overview)
 
 ## dependencias internas
 >- crear un archivo ServerEnums que contiene los datos para las conexiones a la base de datos
@@ -34,3 +36,8 @@ export enum ServerApiEnum{
 
 >>- la conexión con pool necesita que se especifique explicitamente el nombre de la base de datos
 >>- la conexión con ssh a mysql-server en linux necesita que se expecifique explicitamente el nombre de la base de datos
+
+## Uso e instalación
+
+>>- revisar las el archivo `package.json` para verificar las dependencias de nodejs
+>>- instalar las dependencias con el comando: `npm istall`
