@@ -12,6 +12,8 @@
 ## dependencias internas
 >- crear un archivo ServerEnums que contiene los datos para las conexiones a la base de datos
 ##_EJM_
+>>- crear una carpeta dentro de => `src`, denominada: `configs`
+>>- dentro de la carpeta crear un archivo:
 ```js
 export enum ServerApiEnum{
     PORT = puerto para express server,
@@ -29,3 +31,6 @@ export enum ServerApiEnum{
     QUEUE_LIMIT = limite de consultas para el pool
 }
 ```
+
+>>- la conexión con pool necesita que se especifique explicitamente el nombre de la base de datos
+>>- la conexión con ssh a mysql-server en linux necesita que se expecifique explicitamente el nombre de la base de datos
