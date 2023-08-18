@@ -19,6 +19,7 @@
 ```js
 export enum ServerApiEnum{
     PORT = puerto para express server,
+    SSH_PORT = puerto de ssh; default = 22
     HOST = host local de mysql,
     HOST_SSH = host de mysql por ssh,
     USER_1 = usuario 1 de local mysql,
