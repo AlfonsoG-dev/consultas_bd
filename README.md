@@ -34,10 +34,6 @@ export enum ServerApiEnum{
     QUEUE_LIMIT = limite de consultas para el pool
 }
 ```
-
->>- la conexión con pool necesita que se especifique explicitamente el nombre de la base de datos
->>- la conexión con ssh a mysql-server en linux necesita que se expecifique explicitamente el nombre de la base de datos
-
 ## Uso e instalación
 
 >>- revisar el archivo `package.json` para verificar las dependencias de nodejs
