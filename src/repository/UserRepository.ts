@@ -82,7 +82,7 @@ export class UserRepository implements DbQueryModel {
     }
     async autenticate_credentials (nUser: User): Promise<UserTypes[] | undefined>{
           return new Promise((resolve, reject)=>{
-              this.cursor.any_execute('select id, nombre, email, rol from `consulta`.users where nombre=? or email=? and password =?', nUser.get_nombre, nUser.get_email, nUser.get_password)
+              this.cursor.any_execute('select id, nombre, email, rol from `consulta`.users where nombre=? and password =? or email=? and password=?', nUser.get_nombre,nUser.get_password, nUser.get_email, nUser.get_password)
               .then((res) => resolve(res))
               .catch((err) => reject(err))
         })
