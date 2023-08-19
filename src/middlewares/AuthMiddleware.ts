@@ -1,7 +1,16 @@
 import { Request, Response, NextFunction } from "express";
+import {rateLimit} from "express-rate-limit";
 import { UserTypes, User } from "../Models/User";
 import { UserRepository } from "../repository/UserRepository";
 
+//limite de conexión para el login
+const limit = 1 * 15 * 1000
+export const limiter = rateLimit({
+    windowMs: limit,
+    max: 3,
+    message: "Has sobrepaso el numero de intentos; intenta nuevamenta en: " +(limit/1000) +"sg"
+})
+//clase para los middlewares
 type ErrorTypes = Error | any | unknown
 export class AuthMiddleware {
     private repo: UserRepository;
@@ -60,3 +69,4 @@ export class AuthMiddleware {
         }
     }
 }
+

@@ -4,7 +4,7 @@ import { UserRoutes} from "./routes/UserRoutes";
 import { CuentaRoutes } from "./routes/CuentaRoutes";
 import { ServerApiEnum } from "./configs/ServerEnums";
 import cookieParser from "cookie-parser";
-import {AuthMiddleware} from "./middlewares/AuthMiddleware";
+import {AuthMiddleware, limiter} from "./middlewares/AuthMiddleware";
 
 class ServerApi{
     public app: Express;
@@ -40,7 +40,7 @@ class ServerApi{
 
     get init(){
         this.UseLibrery()
-        this.app.post("/", this.auth_middleware.autenticate_user.bind(this.auth_middleware))
+        this.app.post("/", limiter,this.auth_middleware.autenticate_user.bind(this.auth_middleware))
         this.app.get("/", function(req: Request, res: Response){
             res.send(req.ip)
         })
