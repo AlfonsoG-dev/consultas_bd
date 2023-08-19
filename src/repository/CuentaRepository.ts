@@ -60,7 +60,7 @@ export class CuentaRepository implements DbQueryModel{
 
     read_by_user_id(user_id: number, nombre: string, email: string): Promise<CuentaTypes[] | undefined>{
         return new Promise((resolve, reject)=>{
-            this.cursor.any_execute('select cuenta_id, nombre, email from `consulta`.cuentas where user_id=? && nombre=? || email =?', user_id, nombre, email)
+            this.cursor.any_execute('select cuenta_id, nombre, email from `consulta`.cuentas where user_id=? && nombre=? || user_id =? && email =?', user_id, nombre, user_id, email)
             .then((res) => resolve(res))
             .catch((err) => reject(err))
         })
